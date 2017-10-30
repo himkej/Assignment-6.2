@@ -1,0 +1,23 @@
+After loading the data from into HIVE table as suggested in the Assignment 6.1,the below queiries 
+were run to get the desired data
+
+1)Select * from temperature_data
+  where zipcode>300000 and zipcode<399999;
+
+2)Select substring(date,7),max(temperature)
+  from temperature_data
+  group by substring(date,7);
+
+3)Select substring(date,7),max(temperature)
+  from temperature_data
+  group by substring(date,7)
+  having count(*)>1;
+4)create view temperature_data_vw
+  Select substring(date,7),max(temperature)
+  from temperature_data
+  group by substring(date,7)
+  having count(*)>1;
+5)INSERT OVERWRITE LOCAL DIRECTORY '/home/acadgild/Hive/'
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY '|'
+SELECT * FROM temperature_data_vw;
